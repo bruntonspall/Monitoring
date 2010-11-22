@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/poll</url>
+    <description>Poll the website</description>
+    <schedule>every 12 hours synchronized</schedule>
+  </cron>
+</cronentries>

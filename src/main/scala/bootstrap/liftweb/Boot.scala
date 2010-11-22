@@ -1,21 +1,19 @@
 package bootstrap.liftweb
 
 import net.liftweb._
-import common.{Logger, Full, Box}
+import common.Full
 import net.liftweb.util.Helpers._
 import http._
 import java.net.URL
-import com.google.appengine.api.urlfetch.{URLFetchServiceFactory, URLFetchService}
+import com.google.appengine.api.urlfetch.URLFetchServiceFactory
 import scala.xml
-import util.{TimeHelpers, HttpHelpers}
-import xml.{Node, XML}
-import java.util.Date
 import org.joda.time.DateTime
 import com.google.appengine.api.labs.taskqueue.QueueFactory
 import com.google.appengine.api.labs.taskqueue.TaskOptions.Builder._
 import com.google.appengine.api.labs.taskqueue.TaskOptions.Method.GET
 import com.google.appengine.api.datastore._
-import java.io.InputStreamReader
+import net.liftweb.common.Logger
+import xml.{NodeSeq, Node, XML}
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -49,7 +47,8 @@ class Boot {
     val url = new URL(testUrl)
     val response = URLFetchServiceFactory.getURLFetchService.fetch(url)
 
-    val entity = new Entity("RunSupportFiles", runId+filetype)
+    val entity = new Entity("RunSupportFiles", requestId+":"+runId+":"+filetype)
+    entity.setProperty("requestId", requestId)
     entity.setProperty("runId", runId)
     entity.setProperty("type", filetype)
     entity.setProperty("contents", new Blob(response.getContent))
@@ -57,31 +56,34 @@ class Boot {
     Full(InMemoryResponse(response.getContent, List(), List(), 200))
   }
 
+  def handleRunResults(requestId:String, runId:String, results:NodeSeq) = {
+    val datastore = DatastoreServiceFactory.getDatastoreService
+    val entity = new Entity("Run", requestId+":"+runId)
+    entity.setProperty("requestId", requestId)
+    entity.setProperty("runId", runId)
+    entity.setProperty("url", results \ "results" \ "URL" text)
 
-  def handleRun(datastore:DatastoreService, run:Node, requestId:String) = {
-    val results = run \ "firstView" \ "results"
-    val runId = run \ "id" text
-    val entity = new Entity("Run", runId)
-    entity.setProperty("test", requestId)
-    entity.setProperty("url", results \ "URL" text)
-    entity.setProperty("loadTime", results \ "loadTime" text)
-    entity.setProperty("requests", results \ "requests" text)
-    entity.setProperty("render", results \ "render" text)
-    entity.setProperty("fullyLoaded", results \ "fullyLoaded" text)
-    entity.setProperty("docTime", results \ "docTime" text)
-    entity.setProperty("date", new DateTime( (results \ "date").text.toLong).toDate)
+    entity.setProperty("loadTime", results \ "results" \ "loadTime" text)
+    entity.setProperty("requests", results \ "results" \ "requests" text)
+    entity.setProperty("render", results \ "results" \ "render" text)
+    entity.setProperty("fullyLoaded", results \ "results" \ "fullyLoaded" text)
+    entity.setProperty("docTime", results \ "results" \ "docTime" text)
+    entity.setProperty("date", new DateTime( (results \ "results" \ "date").text.toLong).toDate)
     entity.setProperty("rawXml", new Text(results toString))
     datastore.put(entity)
-    val rawDataFiles = run \ "firstView" \ "rawData"
-    val headersFile = rawDataFiles \ "headers" text
-    val pageDataFile = rawDataFiles \ "pageData" text
-    val requestsFile = rawDataFiles \ "requestsData" text
-    val utilizationFile = rawDataFiles \ "utilization" text
+
     val queue = QueueFactory.getDefaultQueue();
-    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","headers").param("url", headersFile).method(GET))
-    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","pagedata").param("url", pageDataFile).method(GET))
-    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","requests").param("url", requestsFile).method(GET))
-    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","utilization").param("url", utilizationFile).method(GET))
+    val rawDataFiles = results \ "rawData"
+    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","headers").param("url", rawDataFiles \ "headers" text).method(GET))
+    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","pagedata").param("url", rawDataFiles \ "pageData" text).method(GET))
+    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","requests").param("url", rawDataFiles \ "requestsData" text).method(GET))
+    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","utilization").param("url", rawDataFiles \ "utilization" text).method(GET))
+  }
+
+  def handleRun(datastore:DatastoreService, run:Node, requestId:String) = {
+    val runId = (run \ "id").text
+    handleRunResults(requestId, runId+"A", run \ "firstView")
+    handleRunResults(requestId, runId+"B", run \ "repeatView")
   }
 
   def doCallback = {
@@ -95,9 +97,10 @@ class Boot {
   }
 
   def doPoll = {
-    val params=List(("url", "http://www.guardian.co.uk"), ("private", "1"), ("f", "xml"), ("runs", "0"), ("callback", "http://gu-monitoring.appspot.com/callback") )
-    val testUrl = "http://localhost:8081/runtest.xml?"+paramsToUrlParams(params)
-//    val testUrl = "http://www.webpagetest.org/runtest.xml?"+paramsToUrlParams(params)
+    val params=List(("url", "http://www.guardian.co.uk"), ("private", "1"), ("f", "xml"), ("runs", "3"), ("callback", "http://gu-monitoring.appspot.com/callback") )
+//    val testUrl = "http://localhost:8081/runtest.xml?"+paramsToUrlParams(params)
+    val testUrl = "http://www.webpagetest.org/runtest.php?"+paramsToUrlParams(params)
+    Logger("doPoll").info("Getting results from "+ testUrl)
     val response = XML.load(new URL(testUrl))
     val datastore = DatastoreServiceFactory.getDatastoreService
     val requestId = response \\ "testId" text
@@ -108,7 +111,7 @@ class Boot {
     entity.setProperty("xmlUrl", response \\ "xmlUrl" text)
     entity.setProperty("summaryCSV", response \\ "summaryCSV" text)
     entity.setProperty("detailsCSV", response \\ "detailsCSV" text)
-    entity.setProperty("rawXml", response toString)
+    entity.setProperty("rawXml", new Text(response toString))
     entity.setProperty("ready", "0")
     datastore.put(entity)
     Full(XmlResponse(response))
