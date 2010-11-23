@@ -91,6 +91,7 @@ class Boot {
     val datastore = DatastoreServiceFactory.getDatastoreService
     val entity = datastore.get(KeyFactory.createKey("Test", requestId))
     entity.setProperty("ready", "1")
+    datastore.put(entity)
     val xmlDetails = XML.load(new URL(entity.getProperty("xmlUrl").asInstanceOf[String]))
     xmlDetails \\ "run" foreach (run => handleRun(datastore, run, requestId))
     Full(XmlResponse(xmlDetails))
@@ -98,8 +99,8 @@ class Boot {
 
   def doPoll = {
     val params=List(("url", "http://www.guardian.co.uk"), ("private", "1"), ("f", "xml"), ("runs", "3"), ("callback", "http://gu-monitoring.appspot.com/callback") )
-//    val testUrl = "http://localhost:8081/runtest.xml?"+paramsToUrlParams(params)
-    val testUrl = "http://www.webpagetest.org/runtest.php?"+paramsToUrlParams(params)
+    val testUrl = "http://localhost:8081/runtest.xml?"+paramsToUrlParams(params)
+//    val testUrl = "http://www.webpagetest.org/runtest.php?"+paramsToUrlParams(params)
     Logger("doPoll").info("Getting results from "+ testUrl)
     val response = XML.load(new URL(testUrl))
     val datastore = DatastoreServiceFactory.getDatastoreService
