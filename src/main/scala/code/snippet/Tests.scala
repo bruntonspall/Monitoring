@@ -1,6 +1,4 @@
-package code {
-package snippet {
-
+package code.snippet
 import _root_.scala.xml.{NodeSeq, Text}
 import _root_.net.liftweb.util._
 import Helpers._
@@ -18,21 +16,11 @@ class Tests {
     datastore.prepare(query).asIterator.toList
 
   }
-  def all(xhtml: NodeSeq):NodeSeq = {
-    allTests flatMap( test => <li>
-      <a href={"/"+test.getProperty("requestId")} >
-              {test.getProperty("requestId")}
-      </a></li>)
+  def all= {
+    "li" #> allTests.map(test =>
+      "a [href]" #> test.getProperty("requestId") &
+      "a *" #> test.getProperty("requestId")
+     )
+    //"li" #> allTests.map(test => <a href={"/"+test.getProperty("requestId")}>{test.getProperty("requestId")}</a>)
   }
-
-/*    {
-    allTests flatMap( test =>
-            bind ("f", xhtml,
-              "requestId" --> test.getProperty("requestId"),
-              "ready" --> test.getProperty("ready"))
-    )
-  } */
-}
-
-}
 }
