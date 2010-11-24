@@ -18,8 +18,8 @@ class Tests {
   }
   def all= {
     "li" #> allTests.map(test =>
-      "a [href]" #> test.getProperty("requestId") &
-      "a *" #> test.getProperty("requestId")
+      "a [href]" #> test.getProperty("requestId").toString &
+      "a *" #> test.getProperty("requestId").toString
      )
     //"li" #> allTests.map(test => <a href={"/"+test.getProperty("requestId")}>{test.getProperty("requestId")}</a>)
   }
