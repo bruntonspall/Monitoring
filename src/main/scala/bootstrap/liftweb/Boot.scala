@@ -68,6 +68,7 @@ class Boot {
     entity.setProperty("render", results \ "results" \ "render" text)
     entity.setProperty("fullyLoaded", results \ "results" \ "fullyLoaded" text)
     entity.setProperty("docTime", results \ "results" \ "docTime" text)
+    entity.setProperty("rawDate", (results \ "results" \ "date").text.toLong)
     entity.setProperty("date", new DateTime( (results \ "results" \ "date").text.toLong).toDate)
     entity.setProperty("rawXml", new Text(results toString))
     datastore.put(entity)
