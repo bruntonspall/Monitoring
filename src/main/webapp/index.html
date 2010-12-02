@@ -4,24 +4,37 @@
   <body class="lift:content_id=main">
     <div id="main" class="lift:surround?with=default;at=content">
       <h2>Welcome to your project!</h2>
-      <p>
-        <ul class="lift:tests.all">
-            <li>
-                <span class="requestId"></span>
-                <span>
-                    <ol class="runs">
-                        <li class="arun">
-                            <dl>
-                                <dt>Render Time: </dt><dd class="domrender">1</dd>
-                                <dt>Full Time: </dt><dd class="loadtime">2</dd>
-                                <dt>Run Id: </dt><dd class="runid">3</dd>
-                            </dl>
-                        </li>
-                    </ol>
-                </span>
-            </li>
-        </ul>
-      </p>
+        <table class="lift:tests.all">
+            <thead>
+            <tr>
+                <th>RequestId</th>
+                <th>Run Data</th>
+            </tr>
+            </thead>
+            <tr class="request">
+                <td class="requestId"></td>
+                <td>
+                    <table class="runs">
+                        <thead>
+                        <tr>
+                            <th>Run Id</th>
+                            <th># Requests</th>
+                            <th>Dom Time</th>
+                            <th>Load Time</th>
+                            <th>Full Time</th>
+                        </tr>
+                        </thead>
+                        <tr class="run">
+                            <td class="runid">3</td>
+                            <td class="requests">3</td>
+                            <td class="domrender">1</td>
+                            <td class="loadtime">1</td>
+                            <td class="fullyloaded">2</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </div>
   </body>
 </html>

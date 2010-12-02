@@ -45,12 +45,14 @@ class Tests {
   }
 
   def all= {
-    "li" #> allTests.map(test =>
+    ".request" #> allTests.map(test =>
       ".requestId *" #> test.requestId &
-      ".arun" #> (test.runs.map(run =>
+      ".run" #> (test.runs.map(run =>
         ".domrender *" #> run.render &
         ".loadtime *" #> run.loadTime &
-        ".runid *" #> run.runId 
+        ".requests *" #> run.requests &
+        ".fullyloaded *" #> run.fullyLoaded &
+        ".runid *" #> run.runId
        ))
      )
   }
