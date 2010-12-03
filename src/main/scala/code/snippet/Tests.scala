@@ -4,7 +4,8 @@ import Helpers._
 import scala.collection.JavaConversions._
 import com.google.appengine.api.datastore._
 import com.google.appengine.api.datastore.Query.FilterOperator
-
+import net.liftweb.widgets.flot._
+import net.liftweb.http.js.JsCmds._
 
 class Test(e: Entity) {
 
@@ -16,7 +17,7 @@ class Test(e: Entity) {
   def rawXml = e.getProperty("rawXml").asInstanceOf[Text].getValue
   def ready = e.getProperty("ready") match { case "0" => false; case "1" => true}
   def runs = DatastoreServiceFactory.getDatastoreService.prepare(
-    new Query("Run").addFilter("requestId", FilterOperator.EQUAL, requestId).addSort("runId")
+    new Query("Run").addFilter("requestId", FilterOperator.EQUAL, requestId).addSort("rawDate")
   ).asIterable.map(new Run(_))
 }
 
@@ -30,7 +31,7 @@ class Run(e: Entity) {
   def render = e.getProperty("render").toString
   def fullyLoaded = e.getProperty("fullyLoaded").toString
   def docTime = e.getProperty("docTime").toString
-  def rawDate = e.getProperty("rawDate").toString
+  def rawDate = Option(e.getProperty("rawDate")).getOrElse(1290695200).toString
   def date = e.getProperty("date").toString
 }
 
@@ -42,6 +43,18 @@ class Tests {
     val datastore = DatastoreServiceFactory.getDatastoreService
     datastore.prepare(query).asIterator.toList.map(new Test(_))
 
+  }
+
+  def fully_loaded_data = new FlotSerie() {
+    override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith("A")).map(run => (run.rawDate.toDouble, run.fullyLoaded.toDouble)))
+  }
+
+  def dom_ready_data = new FlotSerie() {
+    override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith("A")).map(run => (run.rawDate.toDouble, run.render.toDouble)))
+  }
+
+  def graph = {
+    ".graph_area" #> Flot.render("none", List(fully_loaded_data, dom_ready_data), new FlotOptions {}, Noop)
   }
 
   def all= {

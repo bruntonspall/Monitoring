@@ -14,6 +14,7 @@ import com.google.appengine.api.labs.taskqueue.TaskOptions.Method.GET
 import com.google.appengine.api.datastore._
 import net.liftweb.common.Logger
 import xml.{NodeSeq, Node, XML}
+import net.liftweb.widgets.flot._
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -35,7 +36,7 @@ class Boot {
     }
     // Force the request to be UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
-
+    Flot.init
   }
 
   def doFetch = {
@@ -100,8 +101,11 @@ class Boot {
 
   def doPoll = {
     val params=List(("url", "http://www.guardian.co.uk"), ("private", "1"), ("f", "xml"), ("runs", "3"), ("callback", "http://gu-monitoring.appspot.com/callback") )
-    val testUrl = "http://localhost:8081/runtest.xml?"+paramsToUrlParams(params)
-//    val testUrl = "http://www.webpagetest.org/runtest.php?"+paramsToUrlParams(params)
+    val testUrl =
+      if ((S.request.open_!.hostName) == "localhost")
+        "http://localhost:8081/runtest.xml?"+paramsToUrlParams(params)
+      else
+        "http://www.webpagetest.org/runtest.php?"+paramsToUrlParams(params)
     Logger("doPoll").info("Getting results from "+ testUrl)
     val response = XML.load(new URL(testUrl))
     val datastore = DatastoreServiceFactory.getDatastoreService

@@ -16,6 +16,7 @@ class LiftProject(info: ProjectInfo)  extends DefaultWebProject(info) {
   val liftJson = "net.liftweb" %% "lift-json" % liftVersion withSources()
   val liftUtil = "net.liftweb" %% "lift-util" % liftVersion withSources()
   val liftWebkit = "net.liftweb" %% "lift-webkit" % liftVersion withSources()
+  val liftWidgets = "net.liftweb" %% "lift-widgets" % liftVersion withSources()
 
   val jetty7 = "org.eclipse.jetty" % "jetty-webapp" % "7.0.2.v20100331" % "test"
   val jetty7jsp = "org.eclipse.jetty" % "jetty-jsp-2.1" % "7.1.1.v20100517" % "test"
