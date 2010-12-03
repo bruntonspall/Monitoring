@@ -45,16 +45,16 @@ class Tests {
 
   }
 
-  def fully_loaded_data = new FlotSerie() {
-    override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith("A")).map(run => (run.rawDate.toDouble, run.fullyLoaded.toDouble)))
+  def fully_loaded_data(series:String) = new FlotSerie() {
+    override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith(series)).map(run => (run.rawDate.toDouble, run.fullyLoaded.toDouble)))
   }
 
-  def dom_ready_data = new FlotSerie() {
-    override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith("A")).map(run => (run.rawDate.toDouble, run.render.toDouble)))
+  def dom_ready_data(series:String) = new FlotSerie() {
+    override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith(series)).map(run => (run.rawDate.toDouble, run.render.toDouble)))
   }
 
   def graph = {
-    ".graph_area" #> Flot.render("none", List(fully_loaded_data, dom_ready_data), new FlotOptions {}, Noop)
+    ".graph_area" #> Flot.render("none", List(fully_loaded_data("A"), fully_loaded_data("B"), dom_ready_data("A"), dom_ready_data("B")), new FlotOptions {}, Noop)
   }
 
   def all= {
