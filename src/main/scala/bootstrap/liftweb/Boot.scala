@@ -15,14 +15,13 @@ import com.google.appengine.api.datastore._
 import net.liftweb.common.Logger
 import xml.{NodeSeq, Node, XML}
 import net.liftweb.widgets.flot._
-
+import net.liftweb.util.Props
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
  */
 class Boot {
   def boot {
-
     // where to search snippet
     LiftRules.addToPackages("code")
     //LiftRules.statelessTest.append({ case _ => true })
@@ -30,6 +29,7 @@ class Boot {
       case Req("poll" :: Nil, _, GetRequest) => () => doPoll
       case Req("callback" :: Nil, _, GetRequest) => () => doCallback      
       case Req("fetch" :: Nil, _, GetRequest) => () => doFetch      
+      case Req("debug" :: "create-test" :: Nil, _, GetRequest) => () => doDebugCreate
     }
     LiftRules.liftRequest.append {
       case Req("_ah" :: _, _, _) => false
@@ -45,7 +45,7 @@ class Boot {
     val filetype = S.param("type").open_!
     val testUrl = S.param("url").open_!
     val datastore = DatastoreServiceFactory.getDatastoreService
-    val url = new URL(testUrl)
+    val url = new URL(testUrl+"&k="+Props.get("apikey"))
     val response = URLFetchServiceFactory.getURLFetchService.fetch(url)
 
     val entity = new Entity("RunSupportFiles", requestId+":"+runId+":"+filetype)
@@ -103,7 +103,7 @@ class Boot {
   }
 
   def doPoll = {
-    val params=List(("url", "http://www.guardian.co.uk"), ("private", "1"), ("f", "xml"), ("runs", "3"), ("callback", "http://gu-monitoring.appspot.com/callback") )
+    val params=List(("url", "http://www.guardian.co.uk"), ("private", "1"), ("f", "xml"), ("runs", "3"), ("callback", "http://gu-monitoring.appspot.com/callback"), ("k", Props.get("apikey").open_!) )
     val testUrl =
       if ((S.request.open_!.hostName) == "localhost")
         "http://localhost:8081/runtest.xml?"+paramsToUrlParams(params)
@@ -125,5 +125,21 @@ class Boot {
     entity.setProperty("ready", "0")
     datastore.put(entity)
     Full(XmlResponse(response))
+  }
+
+  def doDebugCreate = {
+    val datastore = DatastoreServiceFactory.getDatastoreService
+    val requestId = S.param("requestId").open_!
+    val entity = tryo {
+      datastore.get(KeyFactory.createKey("Test", requestId))
+    } openOr(new Entity("Test", requestId))
+    entity.setProperty("requestId", requestId)
+    entity.setProperty("xmlUrl", "http://www.webpagetest.org/xmlResult/"+requestId+"/")
+    entity.setProperty("summaryCSV", "http://www.webpagetest.org/result/"+requestId+"/page_data.csv")
+    entity.setProperty("detailsCSV", "http://www.webpagetest.org/result/"+requestId+"/requests.csv")
+    entity.setProperty("rawXml", new Text(""))
+    entity.setProperty("ready", "0")
+    datastore.put(entity)
+    Full(PlainTextResponse("OK"))
   }
 }

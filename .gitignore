@@ -1,6 +1,8 @@
 *.class
 *.log
 
+src/main/resources/props/default.props
+
 # sbt specific
 dist/*
 target/
