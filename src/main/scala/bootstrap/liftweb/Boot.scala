@@ -58,6 +58,8 @@ class Boot {
   }
 
   def handleRunResults(requestId:String, runId:String, results:NodeSeq) = {
+    Logger("doPoll").info("Parsing Run Result:  "+ results.toString)
+
     val datastore = DatastoreServiceFactory.getDatastoreService
     val entity = new Entity("Run", requestId+":"+runId)
     entity.setProperty("requestId", requestId)
@@ -69,8 +71,9 @@ class Boot {
     entity.setProperty("render", results \ "results" \ "render" text)
     entity.setProperty("fullyLoaded", results \ "results" \ "fullyLoaded" text)
     entity.setProperty("docTime", results \ "results" \ "docTime" text)
-    entity.setProperty("rawDate", (results \ "results" \ "date").text.toLong)
-    entity.setProperty("date", new DateTime( (results \ "results" \ "date").text.toLong).toDate)
+    val rawDate:Long = (results \ "results" \ "date").text.toLong
+    entity.setProperty("rawDate", rawDate)
+    entity.setProperty("date", new DateTime(rawDate).toDate)
     entity.setProperty("rawXml", new Text(results toString))
     datastore.put(entity)
 
@@ -108,6 +111,7 @@ class Boot {
         "http://www.webpagetest.org/runtest.php?"+paramsToUrlParams(params)
     Logger("doPoll").info("Getting results from "+ testUrl)
     val response = XML.load(new URL(testUrl))
+    Logger("doPoll").info("Got response "+ response)
     val datastore = DatastoreServiceFactory.getDatastoreService
     val requestId = response \\ "testId" text
     val entity = tryo {
