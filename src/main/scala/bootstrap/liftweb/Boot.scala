@@ -16,6 +16,8 @@ import net.liftweb.common.Logger
 import xml.{NodeSeq, Node, XML}
 import net.liftweb.widgets.flot._
 import net.liftweb.util.Props
+import code.snippet.Tests
+
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
@@ -30,6 +32,8 @@ class Boot {
       case Req("callback" :: Nil, _, GetRequest) => () => doCallback      
       case Req("fetch" :: Nil, _, GetRequest) => () => doFetch      
       case Req("debug" :: "create-test" :: Nil, _, GetRequest) => () => doDebugCreate
+      case Req("debug" :: "refetch" :: Nil, _, GetRequest) => () => doDebugRefetch
+      case Req("debug" :: "reverify" :: Nil, _, GetRequest) => () => doDebugReverify
     }
     LiftRules.liftRequest.append {
       case Req("_ah" :: _, _, _) => false
@@ -37,6 +41,7 @@ class Boot {
     // Force the request to be UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
     Flot.init
+    Logger("Boot").info("API Key is "+Props.get("apikey"))
   }
 
   def doFetch = {
@@ -58,8 +63,6 @@ class Boot {
   }
 
   def handleRunResults(requestId:String, runId:String, results:NodeSeq) = {
-    Logger("doPoll").info("Parsing Run Result:  "+ results.toString)
-
     val datastore = DatastoreServiceFactory.getDatastoreService
     val entity = new Entity("Run", requestId+":"+runId)
     entity.setProperty("requestId", requestId)
@@ -98,7 +101,7 @@ class Boot {
     entity.setProperty("ready", "1")
     datastore.put(entity)
     val xmlDetails = XML.load(new URL(entity.getProperty("xmlUrl").asInstanceOf[String]))
-    xmlDetails \\ "run" foreach (run => handleRun(datastore, run, requestId))
+    xmlDetails \ "data" \ "run" foreach (run => handleRun(datastore, run, requestId))
     Full(XmlResponse(xmlDetails))
   }
 
@@ -138,8 +141,28 @@ class Boot {
     entity.setProperty("summaryCSV", "http://www.webpagetest.org/result/"+requestId+"/page_data.csv")
     entity.setProperty("detailsCSV", "http://www.webpagetest.org/result/"+requestId+"/requests.csv")
     entity.setProperty("rawXml", new Text(""))
-    entity.setProperty("ready", "0")
+    entity.setProperty("ready", "1")
     datastore.put(entity)
     Full(PlainTextResponse("OK"))
+  }
+
+  def doDebugRefetch = {
+    val datastore = DatastoreServiceFactory.getDatastoreService
+    val queue = QueueFactory.getDefaultQueue();
+    val ids = new Tests().unparsedTests.map(_.requestId);
+    for (id <- ids) {
+      queue.add(url("/callback").param("id", id).method(GET))
+    }
+    Full(PlainTextResponse(ids.mkString("\r\n")))
+  }
+
+  def doDebugReverify = {
+    val datastore = DatastoreServiceFactory.getDatastoreService
+    val queue = QueueFactory.getDefaultQueue();
+    val ids = new Tests().failedTests.map(_.requestId);
+    for (id <- ids) {
+      queue.add(url("/callback").param("id", id).method(GET))
+    }
+    Full(PlainTextResponse(ids.mkString("\r\n")))
   }
 }

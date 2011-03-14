@@ -5,4 +5,8 @@
         <property name="requestId" direction="asc"/>
         <property name="rawDate" direction="asc"/>
     </datastore-index>
+    <datastore-index kind="Test" ancestor="false" source="manual">
+        <property name="ready" direction="asc"/>
+        <property name="requestId" direction="asc"/>
+    </datastore-index>
 </datastore-indexes>

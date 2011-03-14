@@ -6,6 +6,7 @@ import com.google.appengine.api.datastore._
 import com.google.appengine.api.datastore.Query.FilterOperator
 import net.liftweb.widgets.flot._
 import net.liftweb.http.js.JsCmds._
+import com.google.appengine.api.datastore.FetchOptions.Builder.withLimit
 
 class Test(e: Entity) {
 
@@ -36,13 +37,24 @@ class Run(e: Entity) {
 }
 
 class Tests {
-  private def allTests:List[Test] = {
+  def allTests:List[Test] = {
     val query = new Query("Test")
     query.addSort("requestId")
 
     val datastore = DatastoreServiceFactory.getDatastoreService
     datastore.prepare(query).asIterator.toList.map(new Test(_))
+  }
 
+  def unparsedTests:List[Test] = {
+    val query = new Query("Test")
+    query.addFilter("ready", Query.FilterOperator.EQUAL, "0")
+    query.addSort("requestId")
+    val datastore = DatastoreServiceFactory.getDatastoreService
+    datastore.prepare(query).asIterator(withLimit(5)).toList.map(new Test(_))
+  }
+
+  def failedTests:List[Test] = {
+    allTests.filter(_.runs.size == 0).take(5)
   }
 
   def fully_loaded_data(series:String) = new FlotSerie() {
