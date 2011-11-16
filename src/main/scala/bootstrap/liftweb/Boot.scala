@@ -8,9 +8,9 @@ import java.net.URL
 import com.google.appengine.api.urlfetch.URLFetchServiceFactory
 import scala.xml
 import org.joda.time.DateTime
-import com.google.appengine.api.labs.taskqueue.QueueFactory
-import com.google.appengine.api.labs.taskqueue.TaskOptions.Builder._
-import com.google.appengine.api.labs.taskqueue.TaskOptions.Method.GET
+import com.google.appengine.api.taskqueue.QueueFactory
+import com.google.appengine.api.taskqueue.TaskOptions.Builder._
+import com.google.appengine.api.taskqueue.TaskOptions.Method.GET
 import com.google.appengine.api.datastore._
 import net.liftweb.common.Logger
 import xml.{NodeSeq, Node, XML}
@@ -82,10 +82,10 @@ class Boot {
 
     val queue = QueueFactory.getDefaultQueue();
     val rawDataFiles = results \ "rawData"
-    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","headers").param("url", rawDataFiles \ "headers" text).method(GET))
-    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","pagedata").param("url", rawDataFiles \ "pageData" text).method(GET))
-    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","requests").param("url", rawDataFiles \ "requestsData" text).method(GET))
-    queue.add(url("/fetch").param("requestId", requestId).param("runId", runId).param("type","utilization").param("url", rawDataFiles \ "utilization" text).method(GET))
+    queue.add(withUrl("/fetch").param("requestId", requestId).param("runId", runId).param("type","headers").param("url", rawDataFiles \ "headers" text).method(GET))
+    queue.add(withUrl("/fetch").param("requestId", requestId).param("runId", runId).param("type","pagedata").param("url", rawDataFiles \ "pageData" text).method(GET))
+    queue.add(withUrl("/fetch").param("requestId", requestId).param("runId", runId).param("type","requests").param("url", rawDataFiles \ "requestsData" text).method(GET))
+    queue.add(withUrl("/fetch").param("requestId", requestId).param("runId", runId).param("type","utilization").param("url", rawDataFiles \ "utilization" text).method(GET))
   }
 
   def handleRun(datastore:DatastoreService, run:Node, requestId:String) = {
