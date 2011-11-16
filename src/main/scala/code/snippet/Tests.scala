@@ -4,6 +4,7 @@ import Helpers._
 import scala.collection.JavaConversions._
 import com.google.appengine.api.datastore._
 import com.google.appengine.api.datastore.Query.FilterOperator
+import com.google.appengine.api.datastore.Query._
 import net.liftweb.widgets.flot._
 import net.liftweb.http.js.JsCmds._
 import com.google.appengine.api.datastore.FetchOptions.Builder.withLimit
@@ -42,7 +43,7 @@ class Tests {
     query.addSort("requestId")
 
     val datastore = DatastoreServiceFactory.getDatastoreService
-    datastore.prepare(query).asIterator.toList.map(new Test(_))
+    datastore.prepare(query).asList(FetchOptions.Builder.withLimit(60)).toList.map(new Test(_))
   }
 
   def unparsedTests:List[Test] = {
