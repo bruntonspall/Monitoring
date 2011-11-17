@@ -1,5 +1,5 @@
 package code.snippet
-import _root_.net.liftweb.util._
+import net.liftweb.util._
 import Helpers._
 import scala.collection.JavaConversions._
 import com.google.appengine.api.datastore._
@@ -8,6 +8,7 @@ import com.google.appengine.api.datastore.Query._
 import net.liftweb.widgets.flot._
 import net.liftweb.http.js.JsCmds._
 import com.google.appengine.api.datastore.FetchOptions.Builder.withLimit
+import net.liftweb.common.Full
 
 class Test(e: Entity) {
 
@@ -66,8 +67,20 @@ class Tests {
     override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith(series)).map(run => (run.rawDate.toDouble, run.render.toDouble)))
   }
 
+  val flotOptions = new FlotOptions () {
+   override val legend = Full( new FlotLegendOptions() {
+       override val container = Full("legend_area")
+   })
+   override val xaxis = Full( new FlotAxisOptions() {
+       override val mode = Full("time")
+   })
+  }
+
   def graph = {
-    ".graph_area" #> Flot.render("none", List(fully_loaded_data("A"), fully_loaded_data("B"), dom_ready_data("A"), dom_ready_data("B")), new FlotOptions {}, Noop)
+    ".graph_area" #> Flot.render("none", List(fully_loaded_data("A"), fully_loaded_data("B"),
+                                              dom_ready_data("A"), dom_ready_data("B")),
+      flotOptions,
+      Noop)
   }
 
   def all= {
