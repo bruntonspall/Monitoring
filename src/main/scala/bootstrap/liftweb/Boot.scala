@@ -151,7 +151,7 @@ class Boot {
     val queue = QueueFactory.getDefaultQueue();
     val ids = new Tests().unparsedTests.map(_.requestId);
     for (id <- ids) {
-      queue.add(url("/callback").param("id", id).method(GET))
+      queue.add(withUrl("/callback").param("id", id).method(GET))
     }
     Full(PlainTextResponse(ids.mkString("\r\n")))
   }
@@ -161,7 +161,7 @@ class Boot {
     val queue = QueueFactory.getDefaultQueue();
     val ids = new Tests().failedTests.map(_.requestId);
     for (id <- ids) {
-      queue.add(url("/callback").param("id", id).method(GET))
+      queue.add(withUrl("/callback").param("id", id).method(GET))
     }
     Full(PlainTextResponse(ids.mkString("\r\n")))
   }
