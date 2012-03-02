@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+<statusCode>200</statusCode>
+<statusText>Ok</statusText>
+<data>
+<runs>1</runs>
+<average>
+<firstView>
+<loadTime>7353</loadTime>
+<TTFB>340</TTFB>
+<bytesIn>911455</bytesIn>
+<bytesInDoc>783195</bytesInDoc>
+<requests>71</requests>
+<requestsDoc>67</requestsDoc>
+<render>3862</render>
+<fullyLoaded>9935</fullyLoaded>
+<docTime>7353</docTime>
+<domTime>0</domTime>
+<avgRun>1</avgRun>
+</firstView>
+</average>
+<run>
+<id>1</id>
+<firstView>
+<results>
+<URL>http://www.aol.com</URL>
+<loadTime>7353</loadTime>
+<TTFB>340</TTFB>
+<bytesOut>42487</bytesOut>
+<bytesOutDoc>40489</bytesOutDoc>
+<bytesIn>911455</bytesIn>
+<bytesInDoc>783195</bytesInDoc>
+<requests>71</requests>
+<requestsDoc>67</requestsDoc>
+<result>0</result>
+<render>3862</render>
+<fullyLoaded>12432</fullyLoaded>
+<cached>0</cached>
+<web>1</web>
+<docTime>7353</docTime>
+<domTime>0</domTime>
+<score_cache>52</score_cache>
+<score_cdn>90</score_cdn>
+<score_gzip>100</score_gzip>
+<score_cookies>88</score_cookies>
+<score_keep-alive>96</score_keep-alive>
+<score_minify>92</score_minify>
+<score_combine>35</score_combine>
+<score_compress>45</score_compress>
+<score_etags>80</score_etags>
+<date>1289420782</date>
+</results>
+<pages>
+<details>http://www.webpagetest.org/result/101110_BCKW/1/details/</details>
+<checklist>http://www.webpagetest.org/result/101110_BCKW/1/performance_optimization/</checklist>
+<report>http://www.webpagetest.org/result/101110_BCKW/1/optimization_report/</report>
+<breakdown>http://www.webpagetest.org/result/101110_BCKW/1/breakdown/</breakdown>
+<domains>http://www.webpagetest.org/result/101110_BCKW/1/domains/</domains>
+<screenShot>http://www.webpagetest.org/result/101110_BCKW/1/screen_shot/</screenShot>
+</pages>
+<thumbnails>
+<waterfall>http://www.webpagetest.org/result/101110_BCKW/1_waterfall_thumb.png</waterfall>
+<checklist>http://www.webpagetest.org/result/101110_BCKW/1_optimization_thumb.png</checklist>
+<screenShot>http://www.webpagetest.org/result/101110_BCKW/1_screen_thumb.jpg</screenShot>
+</thumbnails>
+<images>
+<waterfall>http://www.webpagetest.org/results/10/11/10/BCKW/1_waterfall.png</waterfall>
+<checklist>http://www.webpagetest.org/results/10/11/10/BCKW/1_optimization.png</checklist>
+<screenShot>http://www.webpagetest.org/results/10/11/10/BCKW/1_screen.jpg</screenShot>
+</images>
+<rawData>
+<headers>http://www.webpagetest.org/results/10/11/10/BCKW/1_report.txt</headers>
+<pageData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWPG.txt</pageData>
+<requestsData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWTR.txt</requestsData>
+<utilization>http://www.webpagetest.org/results/10/11/10/BCKW/1_progress.csv</utilization>
+</rawData>
+</firstView>
+    <repeatView>
+    <results>
+    <URL>http://www.aol.com</URL>
+    <loadTime>7353</loadTime>
+    <TTFB>340</TTFB>
+    <bytesOut>42487</bytesOut>
+    <bytesOutDoc>40489</bytesOutDoc>
+    <bytesIn>911455</bytesIn>
+    <bytesInDoc>783195</bytesInDoc>
+    <requests>71</requests>
+    <requestsDoc>67</requestsDoc>
+    <result>0</result>
+    <render>3862</render>
+    <fullyLoaded>13482</fullyLoaded>
+    <cached>0</cached>
+    <web>1</web>
+    <docTime>7353</docTime>
+    <domTime>0</domTime>
+    <score_cache>52</score_cache>
+    <score_cdn>90</score_cdn>
+    <score_gzip>100</score_gzip>
+    <score_cookies>88</score_cookies>
+    <score_keep-alive>96</score_keep-alive>
+    <score_minify>92</score_minify>
+    <score_combine>35</score_combine>
+    <score_compress>45</score_compress>
+    <score_etags>80</score_etags>
+    <date>1289420813</date>
+    </results>
+    <pages>
+    <details>http://www.webpagetest.org/result/101110_BCKW/1/details/</details>
+    <checklist>http://www.webpagetest.org/result/101110_BCKW/1/performance_optimization/</checklist>
+    <report>http://www.webpagetest.org/result/101110_BCKW/1/optimization_report/</report>
+    <breakdown>http://www.webpagetest.org/result/101110_BCKW/1/breakdown/</breakdown>
+    <domains>http://www.webpagetest.org/result/101110_BCKW/1/domains/</domains>
+    <screenShot>http://www.webpagetest.org/result/101110_BCKW/1/screen_shot/</screenShot>
+    </pages>
+    <thumbnails>
+    <waterfall>http://www.webpagetest.org/result/101110_BCKW/1_waterfall_thumb.png</waterfall>
+    <checklist>http://www.webpagetest.org/result/101110_BCKW/1_optimization_thumb.png</checklist>
+    <screenShot>http://www.webpagetest.org/result/101110_BCKW/1_screen_thumb.jpg</screenShot>
+    </thumbnails>
+    <images>
+    <waterfall>http://www.webpagetest.org/results/10/11/10/BCKW/1_waterfall.png</waterfall>
+    <checklist>http://www.webpagetest.org/results/10/11/10/BCKW/1_optimization.png</checklist>
+    <screenShot>http://www.webpagetest.org/results/10/11/10/BCKW/1_screen.jpg</screenShot>
+    </images>
+    <rawData>
+    <headers>http://www.webpagetest.org/results/10/11/10/BCKW/1_report.txt</headers>
+    <pageData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWPG.txt</pageData>
+    <requestsData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWTR.txt</requestsData>
+    <utilization>http://www.webpagetest.org/results/10/11/10/BCKW/1_progress.csv</utilization>
+    </rawData>
+    </repeatView>
+</run>
+<run>
+<id>2</id>
+<firstView>
+<results>
+<URL>http://www.aol.com</URL>
+<loadTime>7353</loadTime>
+<TTFB>340</TTFB>
+<bytesOut>42487</bytesOut>
+<bytesOutDoc>40489</bytesOutDoc>
+<bytesIn>911455</bytesIn>
+<bytesInDoc>783195</bytesInDoc>
+<requests>71</requests>
+<requestsDoc>67</requestsDoc>
+<result>0</result>
+<render>3862</render>
+<fullyLoaded>9012</fullyLoaded>
+<cached>0</cached>
+<web>1</web>
+<docTime>3012</docTime>
+<domTime>0</domTime>
+<score_cache>52</score_cache>
+<score_cdn>90</score_cdn>
+<score_gzip>100</score_gzip>
+<score_cookies>88</score_cookies>
+<score_keep-alive>96</score_keep-alive>
+<score_minify>92</score_minify>
+<score_combine>35</score_combine>
+<score_compress>45</score_compress>
+<score_etags>80</score_etags>
+<date>1289420841</date>
+</results>
+<pages>
+<details>http://www.webpagetest.org/result/101110_BCKW/1/details/</details>
+<checklist>http://www.webpagetest.org/result/101110_BCKW/1/performance_optimization/</checklist>
+<report>http://www.webpagetest.org/result/101110_BCKW/1/optimization_report/</report>
+<breakdown>http://www.webpagetest.org/result/101110_BCKW/1/breakdown/</breakdown>
+<domains>http://www.webpagetest.org/result/101110_BCKW/1/domains/</domains>
+<screenShot>http://www.webpagetest.org/result/101110_BCKW/1/screen_shot/</screenShot>
+</pages>
+<thumbnails>
+<waterfall>http://www.webpagetest.org/result/101110_BCKW/1_waterfall_thumb.png</waterfall>
+<checklist>http://www.webpagetest.org/result/101110_BCKW/1_optimization_thumb.png</checklist>
+<screenShot>http://www.webpagetest.org/result/101110_BCKW/1_screen_thumb.jpg</screenShot>
+</thumbnails>
+<images>
+<waterfall>http://www.webpagetest.org/results/10/11/10/BCKW/1_waterfall.png</waterfall>
+<checklist>http://www.webpagetest.org/results/10/11/10/BCKW/1_optimization.png</checklist>
+<screenShot>http://www.webpagetest.org/results/10/11/10/BCKW/1_screen.jpg</screenShot>
+</images>
+<rawData>
+<headers>http://www.webpagetest.org/results/10/11/10/BCKW/1_report.txt</headers>
+<pageData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWPG.txt</pageData>
+<requestsData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWTR.txt</requestsData>
+<utilization>http://www.webpagetest.org/results/10/11/10/BCKW/1_progress.csv</utilization>
+</rawData>
+</firstView>
+    <repeatView>
+    <results>
+    <URL>http://www.aol.com</URL>
+    <loadTime>7353</loadTime>
+    <TTFB>340</TTFB>
+    <bytesOut>42487</bytesOut>
+    <bytesOutDoc>40489</bytesOutDoc>
+    <bytesIn>911455</bytesIn>
+    <bytesInDoc>783195</bytesInDoc>
+    <requests>71</requests>
+    <requestsDoc>67</requestsDoc>
+    <result>0</result>
+    <render>3862</render>
+    <fullyLoaded>15822</fullyLoaded>
+    <cached>0</cached>
+    <web>1</web>
+    <docTime>9111</docTime>
+    <domTime>0</domTime>
+    <score_cache>52</score_cache>
+    <score_cdn>90</score_cdn>
+    <score_gzip>100</score_gzip>
+    <score_cookies>88</score_cookies>
+    <score_keep-alive>96</score_keep-alive>
+    <score_minify>92</score_minify>
+    <score_combine>35</score_combine>
+    <score_compress>45</score_compress>
+    <score_etags>80</score_etags>
+    <date>1289420872</date>
+    </results>
+    <pages>
+    <details>http://www.webpagetest.org/result/101110_BCKW/1/details/</details>
+    <checklist>http://www.webpagetest.org/result/101110_BCKW/1/performance_optimization/</checklist>
+    <report>http://www.webpagetest.org/result/101110_BCKW/1/optimization_report/</report>
+    <breakdown>http://www.webpagetest.org/result/101110_BCKW/1/breakdown/</breakdown>
+    <domains>http://www.webpagetest.org/result/101110_BCKW/1/domains/</domains>
+    <screenShot>http://www.webpagetest.org/result/101110_BCKW/1/screen_shot/</screenShot>
+    </pages>
+    <thumbnails>
+    <waterfall>http://www.webpagetest.org/result/101110_BCKW/1_waterfall_thumb.png</waterfall>
+    <checklist>http://www.webpagetest.org/result/101110_BCKW/1_optimization_thumb.png</checklist>
+    <screenShot>http://www.webpagetest.org/result/101110_BCKW/1_screen_thumb.jpg</screenShot>
+    </thumbnails>
+    <images>
+    <waterfall>http://www.webpagetest.org/results/10/11/10/BCKW/1_waterfall.png</waterfall>
+    <checklist>http://www.webpagetest.org/results/10/11/10/BCKW/1_optimization.png</checklist>
+    <screenShot>http://www.webpagetest.org/results/10/11/10/BCKW/1_screen.jpg</screenShot>
+    </images>
+    <rawData>
+    <headers>http://www.webpagetest.org/results/10/11/10/BCKW/1_report.txt</headers>
+    <pageData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWPG.txt</pageData>
+    <requestsData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWTR.txt</requestsData>
+    <utilization>http://www.webpagetest.org/results/10/11/10/BCKW/1_progress.csv</utilization>
+    </rawData>
+    </repeatView>
+</run>
+    <run>
+    <id>3</id>
+    <firstView>
+    <results>
+    <URL>http://www.aol.com</URL>
+    <loadTime>9353</loadTime>
+    <TTFB>340</TTFB>
+    <bytesOut>42487</bytesOut>
+    <bytesOutDoc>40489</bytesOutDoc>
+    <bytesIn>911455</bytesIn>
+    <bytesInDoc>783195</bytesInDoc>
+    <requests>71</requests>
+    <requestsDoc>67</requestsDoc>
+    <result>0</result>
+    <render>5862</render>
+    <fullyLoaded>12012</fullyLoaded>
+    <cached>0</cached>
+    <web>1</web>
+    <docTime>3012</docTime>
+    <domTime>0</domTime>
+    <score_cache>52</score_cache>
+    <score_cdn>90</score_cdn>
+    <score_gzip>100</score_gzip>
+    <score_cookies>88</score_cookies>
+    <score_keep-alive>96</score_keep-alive>
+    <score_minify>92</score_minify>
+    <score_combine>35</score_combine>
+    <score_compress>45</score_compress>
+    <score_etags>80</score_etags>
+    <date>1289420911</date>
+    </results>
+    <pages>
+    <details>http://www.webpagetest.org/result/101110_BCKW/1/details/</details>
+    <checklist>http://www.webpagetest.org/result/101110_BCKW/1/performance_optimization/</checklist>
+    <report>http://www.webpagetest.org/result/101110_BCKW/1/optimization_report/</report>
+    <breakdown>http://www.webpagetest.org/result/101110_BCKW/1/breakdown/</breakdown>
+    <domains>http://www.webpagetest.org/result/101110_BCKW/1/domains/</domains>
+    <screenShot>http://www.webpagetest.org/result/101110_BCKW/1/screen_shot/</screenShot>
+    </pages>
+    <thumbnails>
+    <waterfall>http://www.webpagetest.org/result/101110_BCKW/1_waterfall_thumb.png</waterfall>
+    <checklist>http://www.webpagetest.org/result/101110_BCKW/1_optimization_thumb.png</checklist>
+    <screenShot>http://www.webpagetest.org/result/101110_BCKW/1_screen_thumb.jpg</screenShot>
+    </thumbnails>
+    <images>
+    <waterfall>http://www.webpagetest.org/results/10/11/10/BCKW/1_waterfall.png</waterfall>
+    <checklist>http://www.webpagetest.org/results/10/11/10/BCKW/1_optimization.png</checklist>
+    <screenShot>http://www.webpagetest.org/results/10/11/10/BCKW/1_screen.jpg</screenShot>
+    </images>
+    <rawData>
+    <headers>http://www.webpagetest.org/results/10/11/10/BCKW/1_report.txt</headers>
+    <pageData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWPG.txt</pageData>
+    <requestsData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWTR.txt</requestsData>
+    <utilization>http://www.webpagetest.org/results/10/11/10/BCKW/1_progress.csv</utilization>
+    </rawData>
+    </firstView>
+        <repeatView>
+        <results>
+        <URL>http://www.aol.com</URL>
+        <loadTime>7353</loadTime>
+        <TTFB>340</TTFB>
+        <bytesOut>42487</bytesOut>
+        <bytesOutDoc>40489</bytesOutDoc>
+        <bytesIn>911455</bytesIn>
+        <bytesInDoc>783195</bytesInDoc>
+        <requests>71</requests>
+        <requestsDoc>67</requestsDoc>
+        <result>0</result>
+        <render>3862</render>
+        <fullyLoaded>15822</fullyLoaded>
+        <cached>0</cached>
+        <web>1</web>
+        <docTime>9111</docTime>
+        <domTime>0</domTime>
+        <score_cache>52</score_cache>
+        <score_cdn>90</score_cdn>
+        <score_gzip>100</score_gzip>
+        <score_cookies>88</score_cookies>
+        <score_keep-alive>96</score_keep-alive>
+        <score_minify>92</score_minify>
+        <score_combine>35</score_combine>
+        <score_compress>45</score_compress>
+        <score_etags>80</score_etags>
+        <date>1289420931</date>
+        </results>
+        <pages>
+        <details>http://www.webpagetest.org/result/101110_BCKW/1/details/</details>
+        <checklist>http://www.webpagetest.org/result/101110_BCKW/1/performance_optimization/</checklist>
+        <report>http://www.webpagetest.org/result/101110_BCKW/1/optimization_report/</report>
+        <breakdown>http://www.webpagetest.org/result/101110_BCKW/1/breakdown/</breakdown>
+        <domains>http://www.webpagetest.org/result/101110_BCKW/1/domains/</domains>
+        <screenShot>http://www.webpagetest.org/result/101110_BCKW/1/screen_shot/</screenShot>
+        </pages>
+        <thumbnails>
+        <waterfall>http://www.webpagetest.org/result/101110_BCKW/1_waterfall_thumb.png</waterfall>
+        <checklist>http://www.webpagetest.org/result/101110_BCKW/1_optimization_thumb.png</checklist>
+        <screenShot>http://www.webpagetest.org/result/101110_BCKW/1_screen_thumb.jpg</screenShot>
+        </thumbnails>
+        <images>
+        <waterfall>http://www.webpagetest.org/results/10/11/10/BCKW/1_waterfall.png</waterfall>
+        <checklist>http://www.webpagetest.org/results/10/11/10/BCKW/1_optimization.png</checklist>
+        <screenShot>http://www.webpagetest.org/results/10/11/10/BCKW/1_screen.jpg</screenShot>
+        </images>
+        <rawData>
+        <headers>http://www.webpagetest.org/results/10/11/10/BCKW/1_report.txt</headers>
+        <pageData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWPG.txt</pageData>
+        <requestsData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWTR.txt</requestsData>
+        <utilization>http://www.webpagetest.org/results/10/11/10/BCKW/1_progress.csv</utilization>
+        </rawData>
+        </repeatView>
+    </run>
+    <run>
+    <id>4</id>
+    <firstView>
+    <results>
+    <URL>http://www.aol.com</URL>
+    <loadTime>7853</loadTime>
+    <TTFB>340</TTFB>
+    <bytesOut>42487</bytesOut>
+    <bytesOutDoc>40489</bytesOutDoc>
+    <bytesIn>911455</bytesIn>
+    <bytesInDoc>783195</bytesInDoc>
+    <requests>71</requests>
+    <requestsDoc>67</requestsDoc>
+    <result>0</result>
+    <render>3862</render>
+    <fullyLoaded>5012</fullyLoaded>
+    <cached>0</cached>
+    <web>1</web>
+    <docTime>2012</docTime>
+    <domTime>0</domTime>
+    <score_cache>52</score_cache>
+    <score_cdn>90</score_cdn>
+    <score_gzip>100</score_gzip>
+    <score_cookies>88</score_cookies>
+    <score_keep-alive>96</score_keep-alive>
+    <score_minify>92</score_minify>
+    <score_combine>35</score_combine>
+    <score_compress>45</score_compress>
+    <score_etags>80</score_etags>
+    <date>1289421141</date>
+    </results>
+    <pages>
+    <details>http://www.webpagetest.org/result/101110_BCKW/1/details/</details>
+    <checklist>http://www.webpagetest.org/result/101110_BCKW/1/performance_optimization/</checklist>
+    <report>http://www.webpagetest.org/result/101110_BCKW/1/optimization_report/</report>
+    <breakdown>http://www.webpagetest.org/result/101110_BCKW/1/breakdown/</breakdown>
+    <domains>http://www.webpagetest.org/result/101110_BCKW/1/domains/</domains>
+    <screenShot>http://www.webpagetest.org/result/101110_BCKW/1/screen_shot/</screenShot>
+    </pages>
+    <thumbnails>
+    <waterfall>http://www.webpagetest.org/result/101110_BCKW/1_waterfall_thumb.png</waterfall>
+    <checklist>http://www.webpagetest.org/result/101110_BCKW/1_optimization_thumb.png</checklist>
+    <screenShot>http://www.webpagetest.org/result/101110_BCKW/1_screen_thumb.jpg</screenShot>
+    </thumbnails>
+    <images>
+    <waterfall>http://www.webpagetest.org/results/10/11/10/BCKW/1_waterfall.png</waterfall>
+    <checklist>http://www.webpagetest.org/results/10/11/10/BCKW/1_optimization.png</checklist>
+    <screenShot>http://www.webpagetest.org/results/10/11/10/BCKW/1_screen.jpg</screenShot>
+    </images>
+    <rawData>
+    <headers>http://www.webpagetest.org/results/10/11/10/BCKW/1_report.txt</headers>
+    <pageData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWPG.txt</pageData>
+    <requestsData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWTR.txt</requestsData>
+    <utilization>http://www.webpagetest.org/results/10/11/10/BCKW/1_progress.csv</utilization>
+    </rawData>
+    </firstView>
+        <repeatView>
+        <results>
+        <URL>http://www.aol.com</URL>
+        <loadTime>7353</loadTime>
+        <TTFB>340</TTFB>
+        <bytesOut>42487</bytesOut>
+        <bytesOutDoc>40489</bytesOutDoc>
+        <bytesIn>911455</bytesIn>
+        <bytesInDoc>783195</bytesInDoc>
+        <requests>71</requests>
+        <requestsDoc>67</requestsDoc>
+        <result>0</result>
+        <render>3862</render>
+        <fullyLoaded>15822</fullyLoaded>
+        <cached>0</cached>
+        <web>1</web>
+        <docTime>9111</docTime>
+        <domTime>0</domTime>
+        <score_cache>52</score_cache>
+        <score_cdn>90</score_cdn>
+        <score_gzip>100</score_gzip>
+        <score_cookies>88</score_cookies>
+        <score_keep-alive>96</score_keep-alive>
+        <score_minify>92</score_minify>
+        <score_combine>35</score_combine>
+        <score_compress>45</score_compress>
+        <score_etags>80</score_etags>
+        <date>1289420872</date>
+        </results>
+        <pages>
+        <details>http://www.webpagetest.org/result/101110_BCKW/1/details/</details>
+        <checklist>http://www.webpagetest.org/result/101110_BCKW/1/performance_optimization/</checklist>
+        <report>http://www.webpagetest.org/result/101110_BCKW/1/optimization_report/</report>
+        <breakdown>http://www.webpagetest.org/result/101110_BCKW/1/breakdown/</breakdown>
+        <domains>http://www.webpagetest.org/result/101110_BCKW/1/domains/</domains>
+        <screenShot>http://www.webpagetest.org/result/101110_BCKW/1/screen_shot/</screenShot>
+        </pages>
+        <thumbnails>
+        <waterfall>http://www.webpagetest.org/result/101110_BCKW/1_waterfall_thumb.png</waterfall>
+        <checklist>http://www.webpagetest.org/result/101110_BCKW/1_optimization_thumb.png</checklist>
+        <screenShot>http://www.webpagetest.org/result/101110_BCKW/1_screen_thumb.jpg</screenShot>
+        </thumbnails>
+        <images>
+        <waterfall>http://www.webpagetest.org/results/10/11/10/BCKW/1_waterfall.png</waterfall>
+        <checklist>http://www.webpagetest.org/results/10/11/10/BCKW/1_optimization.png</checklist>
+        <screenShot>http://www.webpagetest.org/results/10/11/10/BCKW/1_screen.jpg</screenShot>
+        </images>
+        <rawData>
+        <headers>http://www.webpagetest.org/results/10/11/10/BCKW/1_report.txt</headers>
+        <pageData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWPG.txt</pageData>
+        <requestsData>http://www.webpagetest.org/results/10/11/10/BCKW/1_IEWTR.txt</requestsData>
+        <utilization>http://www.webpagetest.org/results/10/11/10/BCKW/1_progress.csv</utilization>
+        </rawData>
+        </repeatView>
+    </run>
+
+</data>
+</response>

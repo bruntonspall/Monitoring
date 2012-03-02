@@ -1,0 +1,10 @@
+<response>
+<statusCode>200</statusCode>
+<statusText>Ok</statusText>
+<requestId>12345</requestId>
+<data>
+<testId>101110_BCKV</testId>
+<xmlUrl>http://localhost:8080/static/xmlResult/101110_BCKV/data.xml</xmlUrl>
+<userUrl>http://localhost:8080/static/result/101110_BCKV/</userUrl>
+</data>
+</response>

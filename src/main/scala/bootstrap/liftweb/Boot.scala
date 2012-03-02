@@ -38,6 +38,12 @@ class Boot {
     LiftRules.liftRequest.append {
       case Req("_ah" :: _, _, _) => false
     }
+
+    // Serve non html static files
+    LiftRules.liftRequest.append{
+      case Req("static" :: _, _, _) => false
+    }
+
     // Force the request to be UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
     Flot.init
@@ -109,7 +115,7 @@ class Boot {
     val params=List(("url", "http://www.guardian.co.uk"), ("private", "1"), ("f", "xml"), ("runs", "3"), ("callback", "http://gu-monitoring.appspot.com/callback"), ("k", Props.get("apikey").open_!) )
     val testUrl =
       if ((S.request.open_!.hostName) == "localhost")
-        "http://localhost:8081/runtest.xml?"+paramsToUrlParams(params)
+        "http://localhost:8080/static/runtest.xml?"+paramsToUrlParams(params)
       else
         "http://www.webpagetest.org/runtest.php?"+paramsToUrlParams(params)
     Logger("doPoll").info("Getting results from "+ testUrl)

@@ -41,7 +41,7 @@ class Run(e: Entity) {
 class Tests {
   def allTests:List[Test] = {
     val query = new Query("Test")
-    query.addSort("requestId")
+    query.addSort("rawDate")
 
     val datastore = DatastoreServiceFactory.getDatastoreService
     datastore.prepare(query).asList(FetchOptions.Builder.withLimit(60)).toList.map(new Test(_))
