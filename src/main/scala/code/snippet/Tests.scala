@@ -41,7 +41,7 @@ class Run(e: Entity) {
 class Tests {
   def allTests:List[Test] = {
     val query = new Query("Test")
-    query.addSort("rawDate")
+    query.addFilter("ready", Query.FilterOperator.EQUAL, "1")
 
     val datastore = DatastoreServiceFactory.getDatastoreService
     datastore.prepare(query).asList(FetchOptions.Builder.withLimit(60)).toList.map(new Test(_))
@@ -61,15 +61,18 @@ class Tests {
 
   def fully_loaded_data(series:String) = new FlotSerie() {
     override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith(series)).map(run => (run.rawDate.toDouble, run.fullyLoaded.toDouble)))
+    override val label = Full(series+" Full Load Time")
   }
 
   def dom_ready_data(series:String) = new FlotSerie() {
     override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith(series)).map(run => (run.rawDate.toDouble, run.render.toDouble)))
+    override val label = Full(series+" Dom Ready Time")
   }
 
   val flotOptions = new FlotOptions () {
    override val legend = Full( new FlotLegendOptions() {
-       override val container = Full("legend_area")
+     override val show = Full(true)
+//       override val container = Full("legend_area")
    })
    override val xaxis = Full( new FlotAxisOptions() {
        override val mode = Full("time")
