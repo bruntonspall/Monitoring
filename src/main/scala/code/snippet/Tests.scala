@@ -47,6 +47,15 @@ class Tests {
     datastore.prepare(query).asList(FetchOptions.Builder.withLimit(60)).toList.map(new Test(_))
   }
 
+  def runs:List[Run] = {
+    val query = new Query("Run")
+    query.addSort("rawDate")
+
+    val datastore = DatastoreServiceFactory.getDatastoreService
+    datastore.prepare(query).asList(FetchOptions.Builder.withLimit(60)).toList.map(new Run(_))
+
+  }
+
   def unparsedTests:List[Test] = {
     val query = new Query("Test")
     query.addFilter("ready", Query.FilterOperator.EQUAL, "0")
@@ -60,12 +69,12 @@ class Tests {
   }
 
   def fully_loaded_data(series:String) = new FlotSerie() {
-    override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith(series)).map(run => (run.rawDate.toDouble, run.fullyLoaded.toDouble)))
+    override val data = runs.filter(_.runId.endsWith(series)).map(run => (run.rawDate.toDouble, run.fullyLoaded.toDouble))
     override val label = Full(series+" Full Load Time")
   }
 
   def dom_ready_data(series:String) = new FlotSerie() {
-    override val data = allTests.flatMap(_.runs.filter(_.runId.endsWith(series)).map(run => (run.rawDate.toDouble, run.render.toDouble)))
+    override val data = runs.filter(_.runId.endsWith(series)).map(run => (run.rawDate.toDouble, run.render.toDouble))
     override val label = Full(series+" Dom Ready Time")
   }
 
@@ -97,5 +106,15 @@ class Tests {
         ".runid *" #> run.runId
        ))
      )
+  }
+  def allRuns= {
+    ".run" #> (runs.map(run =>
+      ".domrender *" #> run.render &
+      ".date *" #> run.date &
+      ".loadtime *" #> run.loadTime &
+      ".requests *" #> run.requests &
+      ".fullyloaded *" #> run.fullyLoaded &
+      ".runid *" #> run.runId
+    ))
   }
 }
